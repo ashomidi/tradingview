@@ -41,13 +41,35 @@ for (var i = 0; i < btns.length; i++) {
     });
 }
 
+// Fetch data using built-in fetch method
+
+// async function fetchData() {
+//     try {
+//         const response = await fetch(`https://api.mexc.com/api/v3/klines?symbol=BTCUSDT&interval=${currentInterval}&limit=8`);
+
+//         const data = await response.json();
+//         return data;
+//     } catch (error) {
+//         console.error("Error fetching data:", error);
+//         return null;
+//     }
+// }
+
+// Fetch using AJAX
 async function fetchData() {
     try {
-        const response = await fetch(`https://api.mexc.com/api/v3/klines?symbol=BTCUSDT&interval=${currentInterval}&limit=8`);
-        const data = await response.json();
-        return data;
+        const response = await $.ajax({
+            url: `https://api.mexc.com/api/v3/klines?symbol=BTCUSDT&interval=${currentInterval}&limit=8`,
+            method: 'GET',
+            dataType: 'json',
+            cache: true,
+            crossDomain: true,
+            jsonp: true,
+        });
+
+        return response;
     } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching data:", error.message);
         return null;
     }
 }
