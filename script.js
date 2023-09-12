@@ -1,4 +1,5 @@
 let currentInterval = '15m';
+const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
 
 document.getElementById('button15').addEventListener('click', () => {
     updateChart('15m');
@@ -59,7 +60,7 @@ for (var i = 0; i < btns.length; i++) {
 async function fetchData() {
     try {
         const response = await $.ajax({
-            url: `https://api.mexc.com/api/v3/klines?symbol=BTCUSDT&interval=${currentInterval}&limit=8`,
+            url: `${corsProxyUrl}https://api.mexc.com/api/v3/klines?symbol=BTCUSDT&interval=${currentInterval}&limit=8`,
             method: 'GET',
             dataType: 'json',
             cache: true,
